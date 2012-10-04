@@ -4,7 +4,7 @@ class uwsgi::install {
   }
 
   if $uwsgi::params::plugins {
-    package { $uwsgi::paramas::plugins_package:
+    package { $uwsgi::params::plugins_package:
       ensure => installed
     }
   }
