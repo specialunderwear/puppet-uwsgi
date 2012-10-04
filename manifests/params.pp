@@ -4,5 +4,5 @@ class uwsgi::params {
   $plugins = true
 
   $package = ['uwsgi']
-  $plugins_package = ['uswgi-plugins-all']
+  $plugins_package = ['uwsgi-plugin-rack-ruby1.8']
 }
