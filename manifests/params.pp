@@ -1,3 +1,8 @@
 class uwsgi::params {
-  $use_testing = true
+
+  # Enable plugins
+  $use_plugins = true
+
+  $package = ['uwsgi']
+  $plugins_package = ['uswgi-plugins-all']
 }
