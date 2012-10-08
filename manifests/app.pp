@@ -6,6 +6,9 @@ define uwsgi::app (
   $plugins = '',
   $rack = false,
   $postbuffering = false,
+  $uid = 'www-data',
+  $gid = 'www-data',
+  $touchreload = '/tmp/reload.txt',
 ) {
 
   if $plugins {
