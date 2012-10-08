@@ -3,6 +3,6 @@ class uwsgi::service {
     ensure     => 'running',
     enable     => true,
     hasrestart => true,
-    hasstatus  => true,
+    hasstatus  => false,
   }
 }
