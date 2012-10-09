@@ -14,7 +14,9 @@ define uwsgi::app (
   if $plugins {
     if $rack {
       package { $uwsgi::params::rack_plugin:
-        ensure => installed,
+        ensure  => installed,
+        require => File[$rack],
+        notify  => Class['uwsgi::service'],
       }
     }
   }
@@ -23,5 +25,6 @@ define uwsgi::app (
     ensure  => $ensure,
     mode    => '0644',
     content => template('uwsgi/app.ini'),
+    notify  => Class['uwsgi::service'],
   }
 }
