@@ -1,6 +1,6 @@
-class uwsgi {
-  include uwsgi::params
-  include uwsgi::install
-  include uwsgi::service
+class uwsgi($version='latest') {
+  class {"uwsgi::install":
+      $version => $version,
+  } ->
+  class {"uwsgi::service":}
 }
-

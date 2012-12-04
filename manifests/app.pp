@@ -1,30 +1,22 @@
 define uwsgi::app (
-  $socket,
-  $ensure = 'present',
-  $processes = $::processorcount,
-  $master = true,
-  $plugins = '',
-  $rack = false,
-  $postbuffering = false,
-  $uid = 'www-data',
-  $gid = 'www-data',
-  $touchreload = '/tmp/reload.txt',
+  $socket='/var/run/uwsgi.sock',
+  $logto='/var/log/uwsgi.log'
+  $touchreload="/var/run/uwsgi-reload-${title}",
+  $processes=$::processorcount,
 ) {
 
-  if $plugins {
-    if $rack {
-      package { $uwsgi::params::rack_plugin:
-        ensure  => installed,
-        require => File[$rack],
-        notify  => Class['uwsgi::service'],
-      }
-    }
+  file { "${uwsgi::params::configdir}/${name}.ini":
+    ensure  => 'file',
+    overwrite => true,
+    mode    => '0644',
+    content => template('uwsgi/wsgi.xml.erb'),
+    notify  => Class['uwsgi::service'],
   }
 
-  file { "${uwsgi::params::configdir}/${name}.ini":
-    ensure  => $ensure,
-    mode    => '0644',
-    content => template('uwsgi/app.ini'),
-    notify  => Class['uwsgi::service'],
+  # you can reload an app with reloading uwsgi itself
+  exec {"uwsgi-reload-${title}":
+      path => ['/usr/bin'],
+      command => "touch ${touchreload}",
+      refreshonly => true
   }
 }

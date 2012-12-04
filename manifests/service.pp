@@ -4,5 +4,6 @@ class uwsgi::service {
     enable     => true,
     hasrestart => true,
     hasstatus  => false,
+    refreshonly => true
   }
 }

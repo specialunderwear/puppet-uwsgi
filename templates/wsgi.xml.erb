@@ -1,0 +1,26 @@
+<uwsgi>
+    <socket>${buildout:directory}/var/run/avira/uwsgi_auth.sock</socket>
+    <chmod-socket>660</chmod-socket>
+    <touch-reload>${buildout:directory}/var/run/avira/reload_auth</touch-reload>
+    <cpu-affinity>1</cpu-affinity>
+    <log-rsyslog />
+    <disable-logging />
+    <logto>${buildout:directory}/var/log/avira/auth.log</logto>
+    <log-master />
+    <log-reopen />
+    <log-4xx />
+    <log-5xx />
+    <log-date />
+    <log-zero />
+    <master />
+    <lazy />
+    <no-orphans />
+    <processes>3</processes>
+    <reload-mercy>30</reload-mercy>
+    <single-interpreter />
+    <procname-prefix-spaced>apc-auth</procname-prefix-spaced>
+    <listen>65535</listen>
+    <env>AVIRA_CONFIG_PATH=${buildout:directory}/etc/avira/auth</env>
+    <module>apc.auth.wsgi</module>
+    <callable>app</callable>
+</uwsgi>

@@ -4,7 +4,6 @@ class uwsgi::params {
     Debian,Ubuntu: {
       $configdir = '/etc/uwsgi/apps-enabled'
       $package = ['uwsgi']
-      $rack_plugin = ['uwsgi-plugin-rack-ruby1.8','rubygems','ruby-rack']
     }
     default: {
       notify { "${module_name}_unsupported":
